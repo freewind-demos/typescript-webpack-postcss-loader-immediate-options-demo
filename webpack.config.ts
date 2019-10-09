@@ -1,5 +1,6 @@
 import {Configuration} from 'webpack';
 import HtmlWebpackPlugin = require("html-webpack-plugin");
+import postcssNested = require('postcss-nested');
 
 const config: Configuration = {
   mode: "development",
@@ -13,7 +14,12 @@ const config: Configuration = {
       test: /\.pcss$/,
       use: [
         'style-loader',
-        'postcss-loader'
+        {
+          loader: 'postcss-loader',
+          options: {
+            plugins: [postcssNested()]
+          }
+        }
       ]
     }, {
       test: /\.tsx?$/,
